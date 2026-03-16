@@ -32,10 +32,10 @@ const TIMELINE = [
 const VICTORIES = [
   {
     img:        "assets/victory-1.jpg",
-    score:      "208*",
-    tournament: "ICC ODI Series",
-    match:      "vs New Zealand",
-    year:       "2023",
+    score:      "",
+    tournament: "Champions Trophy 2025",
+    match:      "",
+    year:       "2025",
     label:      "Highest ODI score by an Indian",
   },
   {
@@ -43,24 +43,24 @@ const VICTORIES = [
     score:      "IPL 🏆",
     tournament: "Indian Premier League",
     match:      "Gujarat Titans",
-    year:       "2022",
+    year:       "2023",
     label:      "Champions in debut season",
   },
   {
     img:        "assets/victory-3.jpg",
-    score:      "92",
+    score:      "",
     tournament: "Asia Cup",
-    match:      "vs Pakistan",
+    match:      "",
     year:       "2023",
     label:      "Match-winning knock against arch-rivals",
   },
   {
     img:        "assets/victory-4.jpg",
     score:      "101",
-    tournament: "ICC ODI Series",
-    match:      "vs England",
-    year:       "2022",
-    label:      "Dominant century on English soil",
+    tournament: "Asia Cup 2025",
+    match:      "",
+    year:       "2025",
+    label:      "",
   },
 ];
 
