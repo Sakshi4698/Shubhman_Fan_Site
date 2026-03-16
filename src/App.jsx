@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
+const BASE = import.meta.env.BASE_URL;
+const asset = (path) => `${BASE}${path}`;
 const C = {
   dark:"#010D1F",navy:"#003366",indiaBlue:"#1A3A6B",
   gold:"#D4AF37",saffron:"#FF6B35",white:"#F0F4FF",dim:"#4b5263",
