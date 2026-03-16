@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // ── Asset path resolver ───────────────────────────────────────────────────────
-const BASE = window.location.hostname === "sakshi4698.github.io"
-  ? "/Shubhman_Fan_Site/"
-  : "/";
+const BASE = "/Shubhman_Fan_Site/"
 const asset = (path) => `${BASE}${path}`;
 
 // ── Theme ─────────────────────────────────────────────────────────────────────
