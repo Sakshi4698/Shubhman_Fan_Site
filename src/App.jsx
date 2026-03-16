@@ -379,7 +379,7 @@ function StatsSection() {
 function QuoteSection() {
   const ref = useRef();
   const inView = useInView(ref, 0.3);
-  const { isMobile, isTablet } = useBreakpoint();
+  const { isMobile } = useBreakpoint();
   const parts = [
     { text: "when people tell you that ", highlight: false },
     { text: "you can't do it", highlight: true },
@@ -389,40 +389,41 @@ function QuoteSection() {
   ];
   return (
     <section ref={ref} style={{ padding: isMobile ? "70px 24px" : "110px 40px", background: `linear-gradient(to bottom,#040f24,${C.dark})`, position: "relative", overflow: "hidden" }}>
+      {/* Pitch lines */}
       <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(75deg,transparent,transparent 80px,rgba(212,175,55,.02) 80px,rgba(212,175,55,.02) 82px)", pointerEvents: "none" }} />
-      <div style={{ position: "absolute", top: isMobile ? 0 : -20, left: isMobile ? 10 : 40, fontFamily: "Georgia,serif", fontSize: isMobile ? "40vw" : "20rem", color: "rgba(212,175,55,.04)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>"</div>
-      <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "280px 1fr" : "360px 1fr", gap: isMobile ? 32 : 56, alignItems: "center" }}>
-        {!isMobile && (
-          <div style={{ position: "relative", height: isTablet ? 320 : 420, opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(-30px)", transition: "all .8s ease" }}>
-            <div style={{ position: "absolute", top: 12, left: 12, right: -12, bottom: -12, border: `2px solid rgba(212,175,55,.3)`, zIndex: 0, borderRadius: 2 }} />
-            <img src={asset("assets/Subhman.png")} alt="Shubman Gill"
-              style={{ position: "relative", zIndex: 1, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top", display: "block", borderRadius: 2, filter: "brightness(.9) contrast(1.05)" }} />
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "35%", background: `linear-gradient(to top,#040f24,transparent)`, zIndex: 2, borderRadius: 2 }} />
-            <div style={{ position: "absolute", top: 0, left: 0, width: 4, height: "60%", background: `linear-gradient(to bottom,${C.gold},transparent)`, zIndex: 3 }} />
-          </div>
-        )}
-        <div>
-          {isMobile && (
-            <div style={{ position: "relative", height: 200, marginBottom: 24, opacity: inView ? 1 : 0, transition: "all .8s ease" }}>
-              <img src={asset("assets/Subhman.png")} alt="Shubman Gill"
-                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 20%", display: "block", borderRadius: 4, filter: "brightness(.9)" }} />
-              <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: "40%", background: `linear-gradient(to top,#040f24,transparent)` }} />
-            </div>
-          )}
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 28, opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(20px)", transition: "all .6s ease" }}>
-            <div style={{ width: 40, height: 2, background: C.gold }} />
-            <span style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: 5, color: C.gold, textTransform: "uppercase" }}>Shubman Gill</span>
-          </div>
-          <p style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: isMobile ? "clamp(1.8rem,8vw,2.8rem)" : "clamp(1.8rem,3vw,3rem)", lineHeight: 1.3, letterSpacing: isMobile ? 1 : 2, opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(30px)", transition: "all .75s .15s ease" }}>
-            {parts.map((p, i) => (
-              <span key={i} style={{ color: p.highlight ? C.saffron : "rgba(240,244,255,.88)" }}>{p.text}</span>
-            ))}
-          </p>
-          <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 32, justifyContent: "flex-end", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(20px)", transition: "all .6s .3s ease" }}>
-            <span style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: 5, color: "rgba(240,244,255,.35)", textTransform: "uppercase" }}>— SG77</span>
-            <div style={{ width: 40, height: 2, background: C.saffron }} />
-          </div>
+      {/* Large faint quote mark */}
+      <div style={{ position: "absolute", top: isMobile ? -20 : -60, left: isMobile ? 10 : 40, fontFamily: "Georgia,serif", fontSize: isMobile ? "50vw" : "28rem", color: "rgba(212,175,55,.05)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>"</div>
+
+      <div style={{ maxWidth: 860, margin: "0 auto", position: "relative", zIndex: 1, textAlign: "center" }}>
+
+        {/* Label */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginBottom: 32, opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(20px)", transition: "all .6s ease" }}>
+          <div style={{ width: 40, height: 2, background: C.gold }} />
+          <span style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: 5, color: C.gold, textTransform: "uppercase" }}>Shubman Gill</span>
+          <div style={{ width: 40, height: 2, background: C.gold }} />
         </div>
+
+        {/* Quote */}
+        <p style={{
+          fontFamily: "'Bebas Neue',sans-serif",
+          fontSize: isMobile ? "clamp(2rem,8vw,3rem)" : "clamp(2.2rem,4vw,3.8rem)",
+          lineHeight: 1.3, letterSpacing: isMobile ? 1 : 3,
+          opacity: inView ? 1 : 0,
+          transform: inView ? "translateY(0)" : "translateY(30px)",
+          transition: "all .75s .15s ease",
+        }}>
+          {parts.map((p, i) => (
+            <span key={i} style={{ color: p.highlight ? C.saffron : "rgba(240,244,255,.88)" }}>{p.text}</span>
+          ))}
+        </p>
+
+        {/* Attribution */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 14, marginTop: 36, opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(20px)", transition: "all .6s .3s ease" }}>
+          <div style={{ width: 32, height: 2, background: C.saffron }} />
+          <span style={{ fontSize: ".65rem", fontWeight: 700, letterSpacing: 5, color: "rgba(240,244,255,.35)", textTransform: "uppercase" }}>— SG77</span>
+          <div style={{ width: 32, height: 2, background: C.saffron }} />
+        </div>
+
       </div>
     </section>
   );
