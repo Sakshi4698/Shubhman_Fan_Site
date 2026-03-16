@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 
 // ── Asset path resolver ───────────────────────────────────────────────────────
-const BASE = "/Shubhman_Fan_Site/"
+const BASE = "/ShubhmanSite/";
 const asset = (path) => `${BASE}${path}`;
 
 // ── Theme ─────────────────────────────────────────────────────────────────────
@@ -27,6 +27,41 @@ const TIMELINE = [
   {year:"2023",event:"208* · SIMPLY ELEGANT", desc:"Smashed a breathtaking 208* vs New Zealand — highest score by an Indian batter in ODIs at the time."},
   {year:"2023",event:"ICC WORLD CUP",         desc:"Blazed through the tournament as India's top scorer, leading India's charge to the final."},
   {year:"2024",event:"WTC CAMPAIGN",          desc:"Continues as a cornerstone of India's Test lineup in the World Test Championship campaign."},
+];
+
+const VICTORIES = [
+  {
+    img:        "assets/victory-1.jpg",
+    score:      "208*",
+    tournament: "ICC ODI Series",
+    match:      "vs New Zealand",
+    year:       "2023",
+    label:      "Highest ODI score by an Indian",
+  },
+  {
+    img:        "assets/victory-2.jpg",
+    score:      "IPL 🏆",
+    tournament: "Indian Premier League",
+    match:      "Gujarat Titans",
+    year:       "2022",
+    label:      "Champions in debut season",
+  },
+  {
+    img:        "assets/victory-3.jpg",
+    score:      "92",
+    tournament: "Asia Cup",
+    match:      "vs Pakistan",
+    year:       "2023",
+    label:      "Match-winning knock against arch-rivals",
+  },
+  {
+    img:        "assets/victory-4.jpg",
+    score:      "101",
+    tournament: "ICC ODI Series",
+    match:      "vs England",
+    year:       "2022",
+    label:      "Dominant century on English soil",
+  },
 ];
 
 const SOCIALS = [
@@ -356,9 +391,7 @@ function QuoteSection() {
     <section ref={ref} style={{ padding: isMobile ? "70px 24px" : "110px 40px", background: `linear-gradient(to bottom,#040f24,${C.dark})`, position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(75deg,transparent,transparent 80px,rgba(212,175,55,.02) 80px,rgba(212,175,55,.02) 82px)", pointerEvents: "none" }} />
       <div style={{ position: "absolute", top: isMobile ? 0 : -20, left: isMobile ? 10 : 40, fontFamily: "Georgia,serif", fontSize: isMobile ? "40vw" : "20rem", color: "rgba(212,175,55,.04)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>"</div>
-
       <div style={{ maxWidth: 1100, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: isMobile ? "1fr" : isTablet ? "280px 1fr" : "360px 1fr", gap: isMobile ? 32 : 56, alignItems: "center" }}>
-        {/* Left image — desktop/tablet only */}
         {!isMobile && (
           <div style={{ position: "relative", height: isTablet ? 320 : 420, opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(-30px)", transition: "all .8s ease" }}>
             <div style={{ position: "absolute", top: 12, left: 12, right: -12, bottom: -12, border: `2px solid rgba(212,175,55,.3)`, zIndex: 0, borderRadius: 2 }} />
@@ -368,10 +401,7 @@ function QuoteSection() {
             <div style={{ position: "absolute", top: 0, left: 0, width: 4, height: "60%", background: `linear-gradient(to bottom,${C.gold},transparent)`, zIndex: 3 }} />
           </div>
         )}
-
-        {/* Right — quote */}
         <div>
-          {/* Mobile image */}
           {isMobile && (
             <div style={{ position: "relative", height: 200, marginBottom: 24, opacity: inView ? 1 : 0, transition: "all .8s ease" }}>
               <img src={asset("assets/Subhman.png")} alt="Shubman Gill"
@@ -510,6 +540,117 @@ function TimelineSection() {
   );
 }
 
+// ── Victory Gallery ───────────────────────────────────────────────────────────
+function VictoryCard({ v, idx, inView }) {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        position: "relative", overflow: "hidden", borderRadius: 4,
+        cursor: "pointer", height: 420,
+        border: `1px solid ${hovered ? "rgba(212,175,55,.5)" : "rgba(255,255,255,.06)"}`,
+        transition: "all .4s",
+        opacity: inView ? 1 : 0,
+        transform: inView ? "translateY(0)" : "translateY(40px)",
+        transitionDelay: `${idx * 0.12}s`,
+        boxShadow: hovered ? "0 16px 48px rgba(0,0,0,.6)" : "none",
+      }}
+    >
+      {/* Background image */}
+      <img
+        src={asset(v.img)}
+        alt={v.match}
+        style={{
+          position: "absolute", inset: 0, width: "100%", height: "100%",
+          objectFit: "cover", objectPosition: "center top",
+          filter: hovered ? "grayscale(0%) brightness(.8)" : "grayscale(60%) brightness(.55)",
+          transform: hovered ? "scale(1.06)" : "scale(1)",
+          transition: "all .6s ease",
+        }}
+      />
+      {/* Gradient overlay */}
+      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top,rgba(1,13,31,.98) 0%,rgba(1,13,31,.5) 45%,transparent 100%)" }} />
+      {/* Scanlines */}
+      <div style={{ position: "absolute", inset: 0, background: "repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.07) 3px,rgba(0,0,0,.07) 4px)", pointerEvents: "none", opacity: hovered ? 0 : 1, transition: "opacity .4s" }} />
+
+      {/* Top — score badge */}
+      <div style={{
+        position: "absolute", top: 16, left: 16,
+        fontFamily: "'Bebas Neue',sans-serif", fontSize: "2.6rem",
+        color: C.white, lineHeight: 1, letterSpacing: 2,
+        textShadow: "0 2px 16px rgba(0,0,0,.8)",
+      }}>
+        {v.score.includes("🏆") ? (
+          <span>{v.score}</span>
+        ) : (
+          <>
+            {v.score.replace("*", "")}
+            <span style={{ color: C.gold }}>{v.score.includes("*") ? "*" : ""}</span>
+          </>
+        )}
+      </div>
+      {/* Year badge */}
+      <div style={{
+        position: "absolute", top: 16, right: 16,
+        background: "rgba(212,175,55,.15)", border: `1px solid rgba(212,175,55,.4)`,
+        color: C.gold, padding: "4px 10px",
+        fontFamily: "'Bebas Neue',sans-serif", fontSize: ".9rem", letterSpacing: 3,
+      }}>{v.year}</div>
+
+      {/* Bottom — details */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px 18px" }}>
+        {/* Tournament name */}
+        <div style={{
+          fontSize: ".58rem", fontWeight: 700, letterSpacing: 4,
+          color: C.saffron, textTransform: "uppercase", marginBottom: 6,
+        }}>{v.tournament}</div>
+        {/* Match */}
+        <div style={{
+          fontFamily: "'Bebas Neue',sans-serif", fontSize: "1.5rem",
+          color: C.white, letterSpacing: 2, lineHeight: 1, marginBottom: 8,
+        }}>{v.match}</div>
+        {/* Label — reveals on hover */}
+        <div style={{
+          fontSize: ".72rem", color: "rgba(240,244,255,.6)", lineHeight: 1.5,
+          maxHeight: hovered ? 40 : 0, overflow: "hidden",
+          transition: "max-height .4s ease",
+        }}>{v.label}</div>
+        {/* Gold divider */}
+        <div style={{
+          height: 2, marginTop: 12,
+          background: `linear-gradient(to right,${C.gold},transparent)`,
+          width: hovered ? "100%" : "40%",
+          transition: "width .5s ease",
+        }} />
+      </div>
+    </div>
+  );
+}
+
+function VictoryGallery() {
+  const ref = useRef();
+  const inView = useInView(ref, 0.1);
+  const { isMobile, isTablet } = useBreakpoint();
+
+  const cols = isMobile ? "1fr 1fr" : isTablet ? "1fr 1fr" : "1fr 1fr 1fr 1fr";
+
+  return (
+    <section id="victories" ref={ref} style={{ padding: isMobile ? "60px 20px" : "100px 40px", background: `linear-gradient(to bottom,${C.dark},#040f24)` }}>
+      <div style={{ maxWidth: 1300, margin: "0 auto" }}>
+        <SectionLabel>Major Victories</SectionLabel>
+        <SectionTitle>VICTORY GALLERY</SectionTitle>
+        <div style={{ display: "grid", gridTemplateColumns: cols, gap: isMobile ? 12 : 16 }}>
+          {VICTORIES.map((v, i) => (
+            <VictoryCard key={i} v={v} idx={i} inView={inView} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Brand Collabs ─────────────────────────────────────────────────────────────
 function BrandCard({ brand }) {
   const [hovered, setHovered] = useState(false);
@@ -530,7 +671,7 @@ function BrandCollabs() {
   const { isMobile } = useBreakpoint();
   const doubled = [...BRANDS, ...BRANDS];
   return (
-    <section id ='brands' style={{ padding: isMobile ? "60px 0" : "90px 0 80px", background: `linear-gradient(to bottom,${C.dark},#040f24)`, overflow: "hidden" }}>
+    <section id="brands" style={{ padding: isMobile ? "60px 0" : "90px 0 80px", background: `linear-gradient(to bottom,${C.dark},#040f24)`, overflow: "hidden" }}>
       <div style={{ maxWidth: 1300, margin: "0 auto 40px", padding: isMobile ? "0 20px" : "0 40px" }}>
         <SectionLabel>Partnerships</SectionLabel>
         <SectionTitle>BRAND COLLABS</SectionTitle>
@@ -666,7 +807,7 @@ function Footer() {
           </div>
         </div>
         {[
-          { title: "Navigate", links: [["Home", "#hero"], ["STATS", "#stats"], ["Career", "#timeline"], ["Socials", "#socials"]] },
+          { title: "Navigate", links: [["Home", "#hero"], ["STATS", "#stats"], ["Career", "#timeline"], ["Victories", "#victories"], ["Socials", "#socials"]] },
           { title: "Follow", links: [["Instagram", "https://www.instagram.com/shubmangill"], ["Twitter / X", "https://x.com/ShubmanGill"], ["LinkedIn", "https://in.linkedin.com/in/shubmangill"], ["BCCI Profile", "https://www.bcci.tv/international/men/players/shubman-gill/62"]] },
         ].map(col => (
           <div key={col.title}>
@@ -680,6 +821,9 @@ function Footer() {
                 </li>
               ))}
             </ul>
+            <button onClick={toggleSound} style={{ marginTop: 16, background: "none", border: "1px solid rgba(212,175,55,.3)", color: C.gold, padding: "8px 16px", cursor: "pointer", fontSize: ".75rem", letterSpacing: 2, display: "inline-flex", alignItems: "center", gap: 8 }}>
+              {soundOn ? "🔊" : "🔇"} CROWD
+            </button>
           </div>
         ))}
       </div>
@@ -722,6 +866,7 @@ export default function App() {
       <StatsSection />
       <Marquee texts={["FUTURE OF INDIAN CRICKET", "SIMPLY ELEGANT", "BORN TO BAT", "SG 77", "GT CHAMPION 2022", "PUNJAB DA MUNDA"]} reverse />
       <TimelineSection />
+      <VictoryGallery />
       <BrandCollabs />
       <SocialsSection />
       <Footer />
