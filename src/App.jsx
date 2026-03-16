@@ -160,7 +160,7 @@ function Navbar() {
     return () => window.removeEventListener("scroll", h);
   }, []);
 
-  const links = [["ON THE PITCH", "#stats"], ["OFF THE PITCH", "#brands"]];
+  const links = [["ON THE PITCH", "#stats"],["Gallery", "#gallery"], ["OFF THE PITCH", "#brands"]];
   const lnkStyle = { color: "rgba(240,244,255,.8)", textDecoration: "none", fontSize: ".72rem", fontWeight: 700, letterSpacing: "3px", textTransform: "uppercase", cursor: "pointer", display: "block", padding: "10px 0" };
 
   return (
@@ -544,7 +544,7 @@ function TimelineSection() {
 function VictoryCard({ v, idx, inView }) {
   const [hovered, setHovered] = useState(false);
   return (
-    <div
+    <div id='gallery'
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
